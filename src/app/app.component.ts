@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import {User} from './models/user.model';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -15,10 +17,10 @@ export class AppComponent {
   }
 
   listarTodosProdutos(){
-    this.http.get(`${this.apiURL}/users/`).subscribe(result=>console.log(result));
+    this.http.get<User[]>(`${this.apiURL}/users/`).subscribe(result=>console.log(result));
   }
   listarProdutoPorId(){
-    this.http.get(`${this.apiURL}/users/1/`)
+    this.http.get<User>(`${this.apiURL}/users/1/`)
     .subscribe(
       result=>{console.log(result)},
       erro=>{ if (erro.status == 404) console.log('Usuário não localizado.')}
